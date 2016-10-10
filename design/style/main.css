@@ -1,0 +1,194 @@
+html, body, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-size: 16px;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+}
+
+a {
+    color: #08f;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #08f;
+}
+
+#home-menu {
+    color: #eee;
+    background-color: #333;
+}
+
+.pure-menu-heading {
+    color: #eee;
+    text-transform: none;
+}
+
+.pure-menu-heading:visited {
+    color: #eee;
+}
+
+.pure-menu-item .pure-menu-link {
+    color: #ddd;
+}
+
+.pure-menu-item .pure-menu-link:visited {
+    color: #ddd;
+}
+
+.pure-menu-selected {
+    background-color: #666;
+}
+
+.pure-menu-selected .pure-menu-link, .pure-menu-selected .pure-menu-link:visited {
+    color: #eee;
+}
+
+.pure-menu-link:hover {
+    color: #333 !important;
+}
+
+nav {
+    display: inline-block;
+}
+
+#header {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    margin: 0 0 0 0;
+    padding: 2em 0.5em 0.5em 0.5em;
+    color: #fff;
+    background-color: #666;
+}
+
+#header h1 {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+}
+
+#content { 
+    flex: 1;
+    padding: 1em;
+    clear: both;
+}
+
+#content h2 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#flex-container {
+    display: flex;
+}
+
+#flex-container .flex-element {
+    margin-right: 1em;
+    margin-bottom: 2em;
+    flex: 1;
+}
+
+.timeline-container {
+    width: 520px;
+    max-width: 100%;
+}
+
+.challenge {
+    padding: 1em .5em;
+}
+
+.challenge:nth-child(even) {
+    background-color: #eee;
+}
+
+.challenge-header {
+    height: 2em;
+}
+
+.challenge-name {
+    float: left;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+    font-style: italic;
+}
+
+.challenge-hashtag {
+    float: right;
+    color: #08f;
+}
+
+.challenge-description {
+    clear: both;
+}
+
+.challenge-more {
+    margin-top: 1em; 
+}
+
+footer {
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 1em;
+    padding: 1em;
+    color: #eee;
+    background-color: #666;
+}
+
+#home-menu {
+    text-align: left;
+}
+
+#home-menu-nav {
+    float: right;
+}
+
+@media (min-width: 36em) {
+}
+
+@media (max-width: 36em) {
+    .pure-menu-heading {
+        display: block !important;
+    }
+
+    #header {
+        padding-top: 3.5em;
+    }
+}
+
+@media (min-width: 48em) {
+    .hidden-lg {
+        display: none;
+    }
+}
+
+@media (max-width: 48em) {
+    .hidden-sm {
+        display: none;
+    }
+}
+
+@media (min-width: 64em) {
+    #flex-container {
+        flex-flow: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 64em) {
+    #flex-container {
+        flex-flow: column;
+    }
+}
