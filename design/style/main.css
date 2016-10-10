@@ -72,6 +72,10 @@ nav {
     background-color: #666;
 }
 
+.header-scoreboard {
+    background-color: #0a0 !important;
+}
+
 #header h1 {
     font-size: 1.5em;
     font-weight: 600;
@@ -105,37 +109,63 @@ nav {
     max-width: 100%;
 }
 
-.challenge {
+.challenge-list-element {
     padding: 1em .5em;
 }
 
-.challenge:nth-child(even) {
+.challenge-list-element:nth-child(odd) {
     background-color: #eee;
 }
 
-.challenge-header {
+.challenge-list-element-header {
     height: 2em;
 }
 
-.challenge-name {
+.challenge-list-element-name {
     float: left;
     margin: 0;
     padding: 0;
     font-size: 1.2em;
     font-style: italic;
+    font-weight: 600;
 }
 
-.challenge-hashtag {
+.challenge-list-element-hashtag {
     float: right;
     color: #08f;
 }
 
-.challenge-description {
+.challenge-list-element-description {
     clear: both;
 }
 
-.challenge-more {
+.challenge-list-more {
     margin-top: 1em; 
+}
+
+.scoreboard {
+    width: 100%;
+}
+
+.scoreboard thead {
+    color: #eee;
+    background-color: #666;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.scoreboard-place {
+    width: 3em;
+}
+
+.scoreboard-completed {
+    width: 10em;
+    text-align: right;
+}
+
+.scoreboard-points {
+    width: 4em;
+    text-align: right;
 }
 
 footer {
