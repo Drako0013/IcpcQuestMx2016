@@ -1,10 +1,13 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 /*
 States for challenge completion:
 0 - Unchecked
 1 - Not Accepted
 2 - Accepted
 */
+require_once("Validation_Utility.php");
 
 define("servername", 'localhost');
 define("username", 'root');
@@ -13,7 +16,6 @@ define("dbname", 'IcpcQuest');
 define("State_Unchecked", 0);
 define("State_NotAccepted", 1);
 define("State_Accepted", 2);
-
 
 class DBManager{
 	
@@ -34,23 +36,11 @@ class DBManager{
 		$this->conn->close();
 	}
 
-	public function sanitizeString($string){
-		$string = strip_tags($string);
-		$string = htmlspecialchars($string);
-		$string = trim(rtrim(ltrim($string)));
-		return $string;
-	}
-
-	public function addNewContestant($twitter_id, $name, $school, $password){
-		$twitter_id = $this->sanitizeString($twitter_id);
-		$name = $this->sanitizeString($name);
-		$school = $this->sanitizeString($school);
-		$password = $this->sanitizeString($password);
-
-		$query = "INSERT INTO Contestant(twitter_id, name, school, password) VALUES(?,?,?,?)";
+	public function addNewContestant($twitter_name, $name, $school, $password){
+		$query = "INSERT INTO Contestant(twitter_name, name, school, password) VALUES(?,?,?,?)";
 		$statement = $this->conn->prepare($query);
 		$statement->bind_param("ssss", 
-			$twitter_id,
+			$twitter_name,
 			$name,
 			$school,
 			$password);
@@ -59,10 +49,6 @@ class DBManager{
 	}
 
 	public function addNewChallenge($name, $description, $hashtag, $score){
-		$name = $this->sanitizeString($name);
-		$description = $this->sanitizeString($description);
-		$hashtag = $this->sanitizeString($hashtag);
-		
 		$query = "INSERT INTO Challenge(name, description, hashtag, score) VALUES(?,?,?,?)";
 		$statement = $this->conn->prepare($query);
 		$statement->bind_param("sssi", 
@@ -75,7 +61,6 @@ class DBManager{
 	}
 
 	public function addNewChallengeCompletionTry($contestant_id, $challenge_id, $tweet_id){
-		$tweet_id = $this->sanitizeString($tweet_id);
 		$state = constant("State_Unchecked");
 
 		$query = "INSERT INTO ContestantChallengeCompletion(contestant_id, challenge_id, tweet_id, state) VALUES(?,?,?,?)";
@@ -89,16 +74,11 @@ class DBManager{
 		$statement->close();
 	}
 
-	public function editContestantInformation($id, $twitter_id, $name, $school, $password){
-		$twitter_id = $this->sanitizeString($twitter_id);
-		$name = $this->sanitizeString($name);
-		$school = $this->sanitizeString($school);
-		$password = $this->sanitizeString($password);
-		
-		$query = "UPDATE Contestant SET twitter_id = ?, name  = ?, school  = ?, password = ? WHERE id = ?";
+	public function editContestantInformation($id, $twitter_name, $name, $school, $password){
+		$query = "UPDATE Contestant SET twitter_name = ?, name  = ?, school  = ?, password = ? WHERE id = ?";
 		$statement = $this->conn->prepare($query);
 		$statement->bind_param("ssssi", 
-			$twitter_id, 
+			$twitter_name, 
 			$name, 
 			$school, 
 			$password,
@@ -126,10 +106,6 @@ class DBManager{
 	}
 
 	public function editChallengeInformation($id, $name, $description, $hashtag, $score){
-		$name = $this->sanitizeString($name);
-		$description = $this->sanitizeString($description);
-		$hashtag = $this->sanitizeString($hashtag);
-
 		$query = "UPDATE Challenge SET name = ?, description = ?, hashtag = ?, score = ? WHERE id = ?";
 		$statement = $this->conn->prepare($query);
 		$statement->bind_param("sssii", 
@@ -188,11 +164,11 @@ class DBManager{
 	}
 
 	public function getContestantInformation($id){
-		$query = "SELECT id, twitter_id, twitter_name, name, school FROM Contestant WHERE id = ?";
+		$query = "SELECT id, twitter_id, twitter_name, name, school, password FROM Contestant WHERE id = ?";
 		$statement = $this->conn->prepare($query);
 		$statement->bind_param("i", $id);
 		$statement->execute();
-		$statement->bind_result($id, $twitter_id, $twitter_name, $name, $school);
+		$statement->bind_result($id, $twitter_id, $twitter_name, $name, $school, $password);
 
 		$contestant = array();
 		while ($statement->fetch()) {
@@ -201,6 +177,35 @@ class DBManager{
 				"twitter_name" => $twitter_name,
 				"name" => $name,
 				"school" => $school,
+				"password" => $password
+				);
+		}
+		$statement->close();
+		return $contestant;
+	}
+
+	public function getContestantInformationFromLogin($twitter_name, $password){
+		$query = "SELECT id, 
+			twitter_id, 
+			twitter_name, 
+			name, 
+			school, 
+			password 
+			FROM Contestant 
+			WHERE twitter_name = ? AND password = ?";
+		$statement = $this->conn->prepare($query);
+		$statement->bind_param("ss", $twitter_id, $password);
+		$statement->execute();
+		$statement->bind_result($id, $twitter_id, $twitter_name, $name, $school, $password);
+
+		$contestant = array();
+		while ($statement->fetch()) {
+			$contestant = array("id" => $id,
+				"twitter_id" => $twitter_id,
+				"twitter_name" => $twitter_name,
+				"name" => $name,
+				"school" => $school,
+				"password" => $password
 				);
 		}
 		$statement->close();
