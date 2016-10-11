@@ -216,7 +216,7 @@ class DBManager{
 			FROM Contestant 
 			WHERE twitter_name = ? AND password = ?";
 		$statement = $this->conn->prepare($query);
-		$statement->bind_param("ss", $twitter_id, $password);
+		$statement->bind_param("ss", $twitter_name, $password);
 		$statement->execute();
 		$statement->bind_result($id, $twitter_id, $twitter_name, $name, $school, $password);
 
