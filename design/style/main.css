@@ -307,14 +307,14 @@ footer {
     }
 }
 
-@media (min-width: 64em) {
+@media (min-width: 60em) {
     #flex-container {
         flex-flow: row;
         flex-wrap: wrap;
     }
 }
 
-@media (max-width: 64em) {
+@media (max-width: 60em) {
     #flex-container {
         flex-flow: column;
     }
