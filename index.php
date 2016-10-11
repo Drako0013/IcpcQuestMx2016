@@ -1,10 +1,6 @@
 <?php
 session_start();
-$sessionActive = false;
-if(isset($_SESSION["id"])){
-    $sessionActive = true;
-} else {
-}
+$sessionActive = isset($_SESSION["id"]);
 
 require_once('DB_Manager.php');
 
@@ -38,7 +34,7 @@ $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));
             </a>
             <nav id="home-menu-nav">
                 <ul class="pure-menu-list">
-                    <li class="pure-menu-item pure-menu-selected">
+                    <li class="pure-menu-item">
                         <a href="#" class="pure-menu-link"><i class="fa fa-flag"></i> <span class="hidden-sm">Retos</span></a>
                     </li>
                 </ul>
@@ -47,20 +43,33 @@ $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));
                         <a href="#" class="pure-menu-link"><i class="fa fa-table"></i> <span class="hidden-sm">Marcador</span></a>
                     </li>
                 </ul>
+                <?php if ($sessionActive): ?>
                 <ul class="pure-menu-list">
                     <li class="pure-menu-item">
                         <?php
-                            if($sessionActive){
-                                echo '<a href="View_EditUserInformation.php?id='.$_SESSION["id"].'" class="pure-menu-link"><i class="fa fa-user"></i>';
-                                echo $_SESSION["twitter_name"];
-                                echo '</a>';
-                            } else {
-                                echo '<a href="View_Login.php" class="pure-menu-link"><i class="fa fa-user"></i>Usuario</a>';
-                            }
+                            echo '<a href="View_EditUserInformation.php?id='.$_SESSION["id"].'" class="pure-menu-link"><i class="fa fa-user"></i>';
+                            echo $_SESSION["twitter_name"];
+                            echo '</a>';
                         ?>
-                        </a>
                     </li>
                 </ul>
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item">
+                        <a href="#" class="pure-menu-link"><i class="fa fa-sign-out"></i> <span class="hidden-sm">Salir</span></a>
+                    </li>
+                </ul>
+                <?php else: ?>
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item">
+                        <a href="View_Login.php" class="pure-menu-link"><i class="fa fa-sign-in"></i> <span class="hidden-sm">Entrar</span></a>
+                    </li>
+                </ul>
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item">
+                        <a href="#" class="pure-menu-link"><i class="fa fa-user-plus"></i> <span class="hidden-sm">Registro</span></a>
+                    </li>
+                </ul>
+                <?php endif; ?>
             </nav>
         </div>
         <header id="header" class="header-home">
@@ -68,8 +77,15 @@ $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));
         </header>
         <div id="content">
             <p>
-                Hai
+                Texto introductorio.
             </p>
+            <?php if (!$sessionActive): ?>
+            <p>
+                Para poder participar, deberás <a href="#"><i class="fa fa-user-plus"></i> regístrate</a> primero.
+                Si ya lo hiciste, puedes ver tus intentos
+                <a href="View_Login.php"><i class="fa fa-sign-in"></i> iniciando sesión</a>.
+            </p>
+            <?php endif; ?>
             <div id="flex-container">
                 <div class="flex-element">
                     <h2>Nuevos Retos</h2>
@@ -86,6 +102,9 @@ $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));
                                             <div class="challenge-list-element-hashtag">#'.$challengeHashtag.'</div>
                                         </div>
                                         <div class="challenge-list-element-description">'.$challengeDescription.'</div>
+                                        <div class="challenge-list-element-more">
+                                            <a href="#">Ver reto</a>
+                                        </div>
                                     </div>';
                             }
                         ?>
