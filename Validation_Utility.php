@@ -43,5 +43,9 @@ class ValidationUtility{
 	public static function isValidPassword($password){
 		return (strlen($password) >= 6 and strlen($password) <= 20);
 	}
+
+	public static function arrayIsEmpty($array){
+		return (count($array) == 0);
+	}
 }	
 ?>

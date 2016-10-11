@@ -20,7 +20,6 @@ if( isset($_GET['id']) and isset($_GET['result']) ){
 		}
 	}
 } else {
-	echo 'no set';
 	header("location: View_UnvalidatedTweets.php");
 }
 	
