@@ -68,7 +68,7 @@ nav {
     line-height: 1.5em;
     margin: 0 0 0 0;
     padding: 2em 0.5em 0.5em 0.5em;
-    color: #eee;
+    color: #f8f8f8;
     background-color: #666;
 }
 
@@ -91,7 +91,7 @@ nav {
     flex: 1;
     padding: 1em;
     clear: both;
-    background: #fdfdfd;
+    background: #fcfcfc;
 }
 
 #content h2 {
