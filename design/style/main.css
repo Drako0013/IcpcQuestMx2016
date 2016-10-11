@@ -181,10 +181,36 @@ nav {
     text-align: right;
 }
 
+.challenge-title {
+    float: left;
+    margin-top: 0;
+}
+
 .challenge-hashtag {
+    float: right;
     font-style: italic;
     color: #08f;
     vertical-align: bottom;
+    margin-left: 2em;
+}
+
+.challenge-points {
+    line-height: 2em;
+    padding: 0 0.5em;
+    float: right;
+    text-shadow: 0 0 2px #fff;
+    border-radius: 4px;
+    background-color: #ea0;
+    color: #fff;
+}
+
+.challenge-points-accepted {
+    background-color: #0a0;
+}
+
+.challenge-description {
+    margin-top: 1em;
+    clear: both;
 }
 
 .challenge-hashtag-line {
