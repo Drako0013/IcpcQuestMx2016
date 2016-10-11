@@ -80,6 +80,10 @@ nav {
     background-color: #d00 !important;
 }
 
+.header-register {
+    background-color: #08f !important;
+}
+
 #header h1 {
     font-size: 1.5em;
     font-weight: 600;
