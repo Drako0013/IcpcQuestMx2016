@@ -72,6 +72,16 @@ nav {
     background-color: #666;
 }
 
+.header-home {
+    padding-left: 4.5em !important;
+    background-image: url(../images/icpclogo.png);
+    background-size: auto 2em;
+    background-color: #eee !important;
+    color: #000 !important;
+    background-repeat: no-repeat;
+    background-position: left 0.5em bottom 0.25em;
+}
+
 .header-scoreboard {
     background-color: #0a0 !important;
 }
