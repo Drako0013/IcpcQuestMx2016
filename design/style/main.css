@@ -147,6 +147,11 @@ nav {
     clear: both;
 }
 
+.challenge-list-element-more {
+    margin-top: 0.5em;
+    font-size: 0.8em;
+}
+
 .challenge-list-more {
     margin-top: 1em; 
 }
@@ -263,6 +268,14 @@ nav {
     font-size: 0.8em;
     margin: 0.5em;
     color: #888;
+}
+
+.challenge-try-zelda, .challenge-try-zelda:visited {
+    color: #ccc;
+}
+
+.challenge-try-zelda:hover {
+    color: #08f;
 }
 
 footer {
