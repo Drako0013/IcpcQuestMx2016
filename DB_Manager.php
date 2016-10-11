@@ -143,6 +143,28 @@ class DBManager{
 		return $resultSet;
 	}
 
+	public function getLastNChallenges($n){
+		$query = "SELECT id, name, description, hashtag, score FROM Challenge ORDER BY id desc LIMIT ?";
+		$statement = $this->conn->prepare($query);
+		$statement->bind_param("i", $n);
+		$statement->execute();
+		$statement->bind_result($id, $name, $description, $hashtag, $score);
+
+		$challenges = array();
+		$index = 0;
+		while ($statement->fetch()) {
+			$challenges[$index] = array("id" => $id,
+				"name" => $name,
+				"description" => $description,
+				"hashtag" => $hashtag,
+				"score" => $score
+				);
+			$index++;
+		}
+		$statement->close();
+		return $challenges;
+	}
+
 	public function getChallengeInfomation($id){
 		$query = "SELECT * FROM Challenge WHERE id = ?";
 		$statement = $this->conn->prepare($query);
@@ -232,10 +254,10 @@ class DBManager{
 			$challenge_hashtag,
 			$challenge_score);
 
-		$challegesTried = array();
+		$challengesTried = array();
 		$index = 0;
 		while ($statement->fetch()) {
-			$challegesTried[$index] = array("completion_id" => $completion_id,
+			$challengesTried[$index] = array("completion_id" => $completion_id,
 				"completion_twitter_id" => $completion_tweet_id,
 				"completion_state" => $completion_state,
 				"challenge_id" => $challenge_id,
@@ -246,7 +268,35 @@ class DBManager{
 			$index++;
 		}
 		$statement->close();
-		return $challegesTried;
+		return $challengesTried;
+	}
+
+	public function getUnvalidatedTweetsList(){
+		$query = "SELECT id, contestant_id, challenge_id, tweet_id 
+			FROM ContestantChallengeCompletion 
+			WHERE state = ?";
+		
+		$state = constant("State_Unchecked");
+		$statement = $this->conn->prepare($query);
+		$statement->bind_param("i", $state);
+		$statement->execute();
+		$statement->bind_result($id, 
+			$contestant_id, 
+			$challenge_id, 
+			$tweet_id);
+
+		$unvalidatedTweets = array();
+		$index = 0;
+		while ($statement->fetch()) {
+			$unvalidatedTweets[$index] = array("id" => $id,
+				"contestant_id" => $contestant_id,
+				"challenge_id" => $challenge_id,
+				"tweet_id" => $tweet_id
+				);
+			$index++;
+		}
+		$statement->close();
+		return $unvalidatedTweets;
 	}
 
 }
