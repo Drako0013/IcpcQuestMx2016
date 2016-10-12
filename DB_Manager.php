@@ -177,7 +177,7 @@ class DBManager{
 		return $challenges;
 	}
 
-	public function getChallengeInfomation($id){
+	public function getChallengeInformation($id){
 		$query = "SELECT * FROM Challenge WHERE id = ?";
 		$statement = $this->conn->prepare($query);
 		$statement->bind_param("i", $id);
@@ -323,6 +323,112 @@ class DBManager{
 		}
 		$statement->close();
 		return $unvalidatedTweets;
+	}
+
+	public function getUnsolvedChallenges($id){
+		$query = "SELECT id, name, description, hashtag, score 
+			FROM Challenge 
+			WHERE id NOT IN 
+				(SELECT DISTINCT ContestantChallengeCompletion.challenge_id 
+					FROM Contestant JOIN ContestantChallengeCompletion 
+					ON Contestant.id = ContestantChallengeCompletion.contestant_id 
+					WHERE ContestantChallengeCompletion.state = ? and Contestant.id = ?)";
+		
+		$state = constant("State_Unchecked");
+		$statement = $this->conn->prepare($query);
+		$statement->bind_param("ii", $state, $id);
+		$statement->execute();
+		$statement->bind_result($id, 
+			$name, 
+			$description, 
+			$hashtag,
+			$score);
+
+		$unsolvedTweets = array();
+		$index = 0;
+		while ($statement->fetch()) {
+			$unsolvedTweets[$index] = array("id" => $id,
+				"name" => $name,
+				"description" => $description,
+				"hashtag" => $hashtag,
+				"score" => $score
+				);
+			$index++;
+		}
+		$statement->close();
+		return $unsolvedTweets;
+	}
+
+	public function getLastNChallengeTriesFromUser($contestant_id, $challenge_id, $lastN){
+		$query = "SELECT id, tweet_id, state FROM ContestantChallengeCompletion WHERE contestant_id = ? AND challenge_id = ? ORDER BY id DESC LIMIT ?";
+
+		$statement = $this->conn->prepare($query);
+		$statement->bind_param("iii", $contestant_id, $challenge_id, $lastN);
+		$statement->execute();
+		$statement->bind_result($try_id, 
+			$tweet_id, 
+			$state);
+
+		$challengeTries = array();
+		$index = 0;
+		while ($statement->fetch()) {
+			$challengeTries[$index] = array("id" => $try_id,
+				"tweet_id" => $tweet_id,
+				"state" => $state
+				);
+			$index++;
+		}
+		$statement->close();
+		return $challengeTries;
+	}
+
+	public function getLastNNonRejectedChallengeTries($challenge_id, $lastN){
+		$query = "SELECT id, tweet_id, state 
+			FROM ContestantChallengeCompletion 
+			WHERE challenge_id = ? AND state <> ? ORDER BY id DESC LIMIT ?";
+
+		$rejectedState = constant("State_NotAccepted");
+
+		$statement = $this->conn->prepare($query);
+		$statement->bind_param("iii", $challenge_id, $rejectedState, $lastN);
+		$statement->execute();
+		$statement->bind_result($try_id, 
+			$tweet_id, 
+			$state);
+
+		$challengeTries = array();
+		$index = 0;
+		while ($statement->fetch()) {
+			$challengeTries[$index] = array("id" => $try_id,
+				"tweet_id" => $tweet_id,
+				"state" => $state
+				);
+			$index++;
+		}
+		$statement->close();
+		return $challengeTries;
+	}
+
+	public function challengeWasSolvedByUser($contestant_id, $challenge_id){
+		$query = "SELECT id
+			FROM ContestantChallengeCompletion 
+			WHERE contestant_id = ? AND challenge_id = ? AND state = ?";
+
+		$wantedState = constant("State_Accepted");
+
+		$statement = $this->conn->prepare($query);
+		$statement->bind_param("iii", $contestant_id, $challenge_id, $wantedState);
+		$statement->execute();
+		$statement->bind_result($try_id);
+
+		$challengeTries = array();
+		$index = 0;
+		while ($statement->fetch()) {
+			$challengeTries[$index] = array("id" => $try_id);
+			$index++;
+		}
+		$statement->close();
+		return ($index != 0);
 	}
 
 }
