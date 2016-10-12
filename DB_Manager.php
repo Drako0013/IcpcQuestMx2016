@@ -432,17 +432,18 @@ class DBManager{
 	}
 
 	public function getLeaderboard(){
-		$query = "SELECT Contestant.twitter_name, Contestant.name, Contestant.school, SUM(Challenge.score) AS score_sum 
+		$query = "SELECT 
+			Contestant.twitter_name, Contestant.name, Contestant.school, 
+				SUM(Challenge.score) AS score_sum, COUNT(DISTINCT Challenge.id) AS challenges_solved 
 			FROM Contestant JOIN ContestantChallengeCompletion ON Contestant.id = ContestantChallengeCompletion.contestant_id 
 			JOIN Challenge ON ContestantChallengeCompletion.challenge_id = Challenge.id 
-			WHERE ContestantChallengeCompletion.state = ? 
-			GROUP BY Contestant.id ORDER BY score_sum DESC";
+			WHERE ContestantChallengeCompletion.state = ? GROUP BY Contestant.id ORDER BY score_sum DESC";
 		$wantedState = constant("State_Accepted");
 
 		$statement = $this->conn->prepare($query);
 		$statement->bind_param("i", $wantedState);
 		$statement->execute();
-		$statement->bind_result($twitter_name, $name, $school, $score_sum);
+		$statement->bind_result($twitter_name, $name, $school, $score_sum, $challenges_solved);
 
 		$leaderboard = array();
 		$index = 0;
@@ -450,7 +451,9 @@ class DBManager{
 			$leaderboard[$index] = array("twitter_name" => $twitter_name,
 				"name" => $name,
 				"school" => $school,
-				"score_sum" => $score);
+				"score_sum" => $score_sum,
+				"challenges_solved" => $challenges_solved
+				);
 			$index++;
 		}
 		$statement->close();
