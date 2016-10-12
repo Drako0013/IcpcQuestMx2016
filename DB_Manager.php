@@ -87,6 +87,18 @@ class DBManager{
 		$statement->close();
 	}
 
+	public function editContestantInformationWoPassword($id, $twitter_name, $name, $school){
+		$query = "UPDATE Contestant SET twitter_name = ?, name  = ?, school  = ? WHERE id = ?";
+		$statement = $this->conn->prepare($query);
+		$statement->bind_param("sssi", 
+			$twitter_name, 
+			$name, 
+			$school,
+			$id);
+		$statement->execute();
+		$statement->close();
+	}
+
 	public function acceptChallengeCompletion($id){
 		$this->setStateChallengeCompletion($id, constant("State_Accepted"));
 	}
@@ -232,6 +244,20 @@ class DBManager{
 		}
 		$statement->close();
 		return $contestant;
+	}
+
+	public function getContestantPassword($id){
+		$query = "SELECT password FROM Contestant WHERE id = ?";
+		$statement = $this->conn->prepare($query);
+		$statement->bind_param("i", $id);
+		$statement->execute();
+		$statement->bind_result($password);
+
+		while ($statement->fetch()) {
+			$password = $password;
+		}
+		$statement->close();
+		return $password;
 	}
 
 	public function getChallengesTriedFromUser($id){

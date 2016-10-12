@@ -16,14 +16,16 @@ if( isset($_POST["twitter_name"]) and isset($_POST["password"]) ){
 		$db = new DBManager();
 		$contestantInformation = $db->getContestantInformationFromLogin($twitter_name, $password);
 
+		//print_r($contestantInformation);
+
 		$loginSucceeded = !(ValidationUtility::arrayIsEmpty($contestantInformation));
 
 		if($loginSucceeded){
 			session_start();
 			$_SESSION["id"] = $contestantInformation["id"];
 			$_SESSION["twitter_name"] = $contestantInformation["twitter_name"];
-			echo $_SESSION["id"];
-			echo $_SESSION["twitter_name"];
+			//echo $_SESSION["id"];
+			//echo $_SESSION["twitter_name"];
 			header("location: index.php");
 		}else {
 			header("location: View_Login.php");
