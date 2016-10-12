@@ -1,79 +1,9 @@
 <?php
-require_once("Validation_Utility.php");
-require_once('DB_Manager.php');
-
-$sessionActive = ValidationUtility::sessionExists();
-
+require_once("header.php");
 define("ChallengesNumber", 5);
 $db = new DBManager();
 $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));  
 ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ICPC Quest Mexico</title>
-        <script
-            src="https://code.jquery.com/jquery-3.1.0.min.js"
-            integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
-            crossorigin="anonymous">
-        </script>
-        <!--<script src="./script/main.js"></script>-->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i&subset=latin-ext" rel="stylesheet">
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
-        <link rel="stylesheet" href="./style/main.css">
-        <link rel="stylesheet" href="./style/font-awesome/css/font-awesome.min.css">
-    </head>
-    <body>
-        <div id="home-menu" class="pure-menu pure-menu-horizontal pure-menu-fixed">
-            <a class="pure-menu-heading" href="#">
-                ICPC Quest Mexico
-            </a>
-            <nav id="home-menu-nav">
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item">
-                        <a href="#" class="pure-menu-link"><i class="fa fa-flag"></i> <span class="hidden-sm">Retos</span></a>
-                    </li>
-                </ul>
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item">
-                        <a href="#" class="pure-menu-link"><i class="fa fa-table"></i> <span class="hidden-sm">Marcador</span></a>
-                    </li>
-                </ul>
-                <?php if ($sessionActive): ?>
-
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item">
-                        <?php
-                            echo '<a href="View_EditUser.php?id='.$_SESSION["id"].'" class="pure-menu-link"><i class="fa fa-user"></i>';
-                            echo $_SESSION["twitter_name"];
-                            echo '</a>';
-                        ?>
-                    </li>
-                </ul>
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item">
-                        <a href="Core_Logout.php" class="pure-menu-link"><i class="fa fa-sign-out"></i> <span class="hidden-sm">Salir</span></a>
-                    </li>
-                </ul>
-
-                <?php else: ?>
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item">
-                        <a href="View_Register.php" class="pure-menu-link"><i class="fa fa-user-plus"></i> <span class="hidden-sm">Registro</span></a>
-                    </li>
-                </ul>
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item">
-                        <a href="View_Login.php" class="pure-menu-link"><i class="fa fa-sign-in"></i> <span class="hidden-sm">Entrar</span></a>
-                    </li>
-                </ul>
-
-                <?php endif; ?>
-            </nav>
-        </div>
         <header id="header" class="header-home">
             <h1> Inicio</h1>
         </header>
@@ -94,6 +24,7 @@ $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));
                     <div class="challenge-list">
                         <?php
                             foreach ($challengesList as $challenge) {
+                                $challengeId = $challenge["id"];
                                 $challengeName = $challenge["name"];
                                 $challengeHashtag = $challenge["hashtag"];
                                 $challengeDescription = $challenge["description"];
@@ -105,46 +36,11 @@ $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));
                                         </div>
                                         <div class="challenge-list-element-description">'.$challengeDescription.'</div>
                                         <div class="challenge-list-element-more">
-                                            <a href="#">Ver reto</a>
+                                            <a href="View_ChallengeDetails.php?id='.$challengeId.'">Ver reto</a>
                                         </div>
                                     </div>';
                             }
                         ?>
-                        <div class="challenge-list-element">
-                            <div class="challenge-list-element-header">
-                                <h3 class="challenge-list-element-name">
-                                    Mi amuleto
-                                </h3>
-                                <div class="challenge-list-element-hashtag">
-                                    #Quest16Amuleto
-                                </div>
-                            </div>
-                            <div class="challenge-list-element-description">
-                                Foto de un amuleto AYUDA MEDINU SOY MALO CON LOS TEXTOS :&lt;
-                            </div>
-                            <div class="challenge-list-element-more">
-                                <a href="#">Ver reto</a>
-                            </div>
-                        </div>
-                        <div class="challenge-list-element">
-                            <div class="challenge-list-element-header">
-                                <h3 class="challenge-list-element-name">
-                                    Color a ferret
-                                </h3>
-                                <div class="challenge-list-element-hashtag">
-                                    #Quest16Color
-                                </div>
-                            </div>
-                            <div class="challenge-list-element-description">
-                                Como colorear un dinosaurio, pero más shido. :3
-                            </div>
-                            <div class="challenge-list-element-more">
-                                <a href="#">Ver reto</a>
-                            </div>
-                        </div>
-                        <div class="challenge-list-more">
-                            <a href="#">+ Ver más</a>
-                        </div>
                     </div>
                 </div>
                 <div class="timeline-container">

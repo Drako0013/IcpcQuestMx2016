@@ -431,6 +431,32 @@ class DBManager{
 		return ($index != 0);
 	}
 
+	public function getLeaderboard(){
+		$query = "SELECT Contestant.twitter_name, Contestant.name, Contestant.school, SUM(Challenge.score) AS score_sum 
+			FROM Contestant JOIN ContestantChallengeCompletion ON Contestant.id = ContestantChallengeCompletion.contestant_id 
+			JOIN Challenge ON ContestantChallengeCompletion.challenge_id = Challenge.id 
+			WHERE ContestantChallengeCompletion.state = ? 
+			GROUP BY Contestant.id ORDER BY score_sum DESC";
+		$wantedState = constant("State_Accepted");
+
+		$statement = $this->conn->prepare($query);
+		$statement->bind_param("i", $wantedState);
+		$statement->execute();
+		$statement->bind_result($twitter_name, $name, $school, $score_sum);
+
+		$leaderboard = array();
+		$index = 0;
+		while ($statement->fetch()) {
+			$leaderboard[$index] = array("twitter_name" => $twitter_name,
+				"name" => $name,
+				"school" => $school,
+				"score_sum" => $score);
+			$index++;
+		}
+		$statement->close();
+		return $leaderboard;
+	}
+
 }
 
 
