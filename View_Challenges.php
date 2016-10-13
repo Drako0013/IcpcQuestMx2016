@@ -13,7 +13,7 @@ require_once("header.php");
                     <tr>
                         <th>#</th>
                         <th>Reto</th>
-                        <th>Descripción</th>
+                        <th class="hidden-sm">Descripción</th>
                         <th class="scoreboard-completed hidden-sm">Hashtag</th>
                         <th class="scoreboard-points">Puntos</th>
                     </tr>
@@ -30,14 +30,14 @@ require_once("header.php");
                                 echo '<tr>';
                                 echo '<td class="scoreboard-place">#'.$index.'</td>';
                                 echo '<td><a href="View_ChallengeDetails.php?id='.$challenge["id"].'">'.$challenge["name"].'</a></td>';
-                                echo '<td>'.$challenge["description"].'</td>';
-                                echo '<td  class="scoreboard-completed hidden-sm">#'.$challenge["hashtag"].'</td>';
+                                echo '<td class="hidden-sm">'.$challenge["description"].'</td>';
+                                echo '<td class="scoreboard-completed hidden-sm">#'.$challenge["hashtag"].'</td>';
                                 echo '<td class="scoreboard-points">'.$challenge["score"].'</td>';
                                 echo '</tr>';
                                 $index++; 
                             }
                         } else {
-                            echo 'Eres un campeón, no hay más retos que puedas resolver por el momento';
+                            echo 'Eres un campeón, no hay más retos que puedas resolver por el momento.';
                         }
                     } else {
                         $allChallenges = $db->getChallengesList();
@@ -46,8 +46,8 @@ require_once("header.php");
                             echo '<tr>';
                             echo '<td class="scoreboard-place">#'.$index.'</td>';
                             echo '<td><a href="View_ChallengeDetails.php?id='.$challenge["id"].'">'.$challenge["name"].'</a></td>';
-                            echo '<td>'.$challenge["description"].'</td>';
-                            echo '<td  class="scoreboard-completed hidden-sm">#'.$challenge["hashtag"].'</td>';
+                            echo '<td class="hidden-sm">'.$challenge["description"].'</td>';
+                            echo '<td class="scoreboard-completed hidden-sm">#'.$challenge["hashtag"].'</td>';
                             echo '<td class="scoreboard-points">'.$challenge["score"].'</td>';
                             echo '</tr>';
                             $index++; 
@@ -64,7 +64,7 @@ require_once("header.php");
                         <tr>
                             <th>#</th>
                             <th>Reto</th>
-                            <th>Descripción</th>
+                            <th class="hidden-sm">Descripción</th>
                             <th class="scoreboard-completed hidden-sm">Hashtag</th>
                             <th class="scoreboard-points">Puntos</th>
                         </tr>
@@ -79,8 +79,8 @@ require_once("header.php");
                                 echo '<tr>';
                                 echo '<td class="scoreboard-place">#'.$index.'</td>';
                                 echo '<td><a href="View_ChallengeDetails.php?id='.$challenge["id"].'">'.$challenge["name"].'</a></td>';
-                                echo '<td>'.$challenge["description"].'</td>';
-                                echo '<td  class="scoreboard-completed hidden-sm">#'.$challenge["hashtag"].'</td>';
+                                echo '<td class="hidden-sm">'.$challenge["description"].'</td>';
+                                echo '<td class="scoreboard-completed hidden-sm">#'.$challenge["hashtag"].'</td>';
                                 echo '<td class="scoreboard-points">'.$challenge["score"].'</td>';
                                 echo '</tr>';
                                 $index++; 
