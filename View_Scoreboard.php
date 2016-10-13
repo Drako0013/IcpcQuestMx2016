@@ -13,7 +13,7 @@ require_once("header.php");
                     <tr>
                         <th>#</th>
                         <th>Concursante</th>
-                        <th>Escuela</th>
+                        <th class="hidden-sm">Escuela</th>
                         <th class="scoreboard-completed hidden-sm">Retos completados</th>
                         <th class="scoreboard-points">Puntos</th>
                     </tr>
@@ -30,7 +30,7 @@ require_once("header.php");
                     <tr>
                         <td class="scoreboard-place">#<?php echo $index;?></td>
                         <td><a href="#">@<?php echo $contestant["twitter_name"]; ?></a></td>
-                        <td><?php echo $contestant["school"]; ?></td>
+                        <td class="hidden-sm"><?php echo $contestant["school"]; ?></td>
                         <td class="scoreboard-completed hidden-sm"> <?php echo $contestant["challenges_solved"]; ?> </td>
                         <td class="scoreboard-points"><?php echo $contestant["score_sum"]; ?></td>
                     </tr>
