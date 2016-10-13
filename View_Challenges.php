@@ -1,8 +1,8 @@
 <?php
 require_once("header.php");
 ?>
-        <header id="header" class="header-scoreboard">
-            <h1><i class="fa fa-table" aria-hidden="true"></i> Marcador</h1>
+        <header id="header" class="header-challenge">
+            <h1><i class="fa fa-flag" aria-hidden="true"></i> Retos</h1>
         </header>
         <div id="content">
             <p>
