@@ -18,7 +18,7 @@ $errorCode = ValidationUtility::getErrorCode();
                     echo constant($errorCode);
                 }
             ?>
-            <form class="pure-form pure-form-aligned" action="Core_RegisterUser.php" method="POST">
+            <form class="pure-form pure-form-aligned" action="Core_RegisterUser.php" method="POST" accept-charset="utf-8">
                 <fieldset>
                     <div class="pure-control-group">
                         <label for="twitter_name">Nombre de usuario en Twitter: @</label>

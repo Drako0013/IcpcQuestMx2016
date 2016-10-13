@@ -10,7 +10,7 @@ if( isset($_POST["twitter_name"]) and isset($_POST["password"]) ){
 	$password = ValidationUtility::sanitizeString($_POST["password"]);
 
 	if( ValidationUtility::isValidTwitterName($twitter_name) 
-		and ValidationUtility::isValidPassword($password) ){
+		and ValidationUtility::isValidPasswordLength($password) ){
 
 		$password = ValidationUtility::hashString($password);
 		$db = new DBManager();

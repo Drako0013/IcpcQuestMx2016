@@ -164,7 +164,7 @@ if( isset($_GET["id"]) ){
 			        echo '</div>';
 	            } else {
 	            	//No tiene intentos
-	            	echo "<h3>Vaya, nadie ha intentado este reto, puedes ser el primero/h3>";
+	            	echo "<h3>Vaya, nadie ha intentado este reto, puedes ser el primero</h3>";
 	            }
             ?>
         </div>

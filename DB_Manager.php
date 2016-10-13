@@ -13,6 +13,7 @@ define("servername", 'localhost');
 define("username", 'root');
 define("password", 'n0m3l0s3');
 define("dbname", 'IcpcQuest');
+define("charset", "utf8");
 define("State_Unchecked", 0);
 define("State_NotAccepted", 1);
 define("State_Accepted", 2);
@@ -30,6 +31,7 @@ class DBManager{
 		if( mysqli_connect_errno() ){
 			throw new Exception('Failed to connect to database: ' . mysqli_connect_errno() );
 		}
+		$this->conn->set_charset(constant("charset"));
 	}
 
 	public function __destruct(){
@@ -39,13 +41,14 @@ class DBManager{
 	public function addNewContestant($twitter_name, $name, $school, $password){
 		$query = "INSERT INTO Contestant(twitter_name, name, school, password) VALUES(?,?,?,?)";
 		$statement = $this->conn->prepare($query);
-		$statement->bind_param("ssss", 
-			$twitter_name,
-			$name,
-			$school,
-			$password);
-		$statement->execute();
+		if( !( $statement->bind_param("ssss", $twitter_name, $name, $school,	$password) ) ){
+			return false;
+		}
+		if( !( $statement->execute() ) ){
+			return false;;
+		}
 		$statement->close();
+		return true;
 	}
 
 	public function addNewChallenge($name, $description, $hashtag, $score){

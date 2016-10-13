@@ -1,21 +1,22 @@
 <?php
-require_once("DB_Manager.php");
-require_once("Validation_Utility.php");
+require_once("header.php");
 
-$sessionActive = ValidationUtility::sessionExists();
-if( $sessionActive ){
+if($sessionActive){
+    $id = (int)$_SESSION["id"];
+    $db = new DBManager();
+    $contestantInformation = $db->getContestantInformation($id);
+    //print_r($contestantInformation);
+    $twitter_name = $contestantInformation["twitter_name"];
+    $name = $contestantInformation["name"];
+    $school = $contestantInformation["school"];
 
-	$id = (int)$_SESSION["id"];
-	$db = new DBManager();
-	$contestantInformation = $db->getContestantInformation($id);
-	//print_r($contestantInformation);
-	$twitter_name = $contestantInformation["twitter_name"];
-	$name = $contestantInformation["name"];
-	$school = $contestantInformation["school"];
-
-	if( !(ValidationUtility::arrayIsEmpty($contestantInformation)) ){
+    if( !(ValidationUtility::arrayIsEmpty($contestantInformation)) ){
 ?>
-			<form class="pure-form pure-form-aligned" action="Core_EditUser.php" method="POST">
+        <header id="header" class="header-register">
+            <h1><i class="fa fa-user-plus" aria-hidden="true"></i> Editar información</h1>
+        </header>
+        <div id="content">
+            <form class="pure-form pure-form-aligned" action="Core_EditUser.php" method="POST">
                 <fieldset>
                     <div class="pure-control-group">
                         <label for="twitter_name">Nombre de usuario en Twitter: @</label>
@@ -45,10 +46,16 @@ if( $sessionActive ){
                     </div>
 
                     <div class="pure-controls">
-                        <button type="submit" class="pure-button pure-button-primary">Registrarse</button>
+                        <button type="submit" class="pure-button pure-button-primary">Cambiar datos</button>
                     </div>
                 </fieldset>
             </form>
+        </div>
+        <footer>
+            Un pie de página
+        </footer>
+    </body>
+</html>
 <?php
 	} else {
 		header("location: index.php");

@@ -57,8 +57,13 @@ require_once("header.php");
                 </tbody>
             </table>
 
-            <?php if($sessionActive){ ?>
-                <h3>Retos resueltos</h3>
+            <?php 
+            if($sessionActive){ 
+                $contestant_id = (int)$_SESSION["id"];
+                $solvedChallenges = $db->getSolvedChallenges($contestant_id);
+                echo '<h3>Retos resueltos</h3>';
+                if(!ValidationUtility::arrayIsEmpty($solvedChallenges)){
+            ?>
                 <table class="scoreboard pure-table pure-table-horizontal pure-table-striped">
                     <thead>
                         <tr>
@@ -71,6 +76,7 @@ require_once("header.php");
                     </thead>
                     <tbody>
                     <?php
+<<<<<<< Updated upstream
                         $contestant_id = (int)$_SESSION["id"];
                         $solvedChallenges = $db->getSolvedChallenges($contestant_id);
                         if(!ValidationUtility::arrayIsEmpty($solvedChallenges)){
@@ -87,11 +93,28 @@ require_once("header.php");
                             }
                         } else {
                             echo 'Todavia no has resuelto algún reto';
+=======
+                        $index = 1;
+                        foreach($solvedChallenges as $challenge){
+                            echo '<tr>';
+                            echo '<td class="scoreboard-place">#'.$index.'</td>';
+                            echo '<td><a href="View_ChallengeDetails.php?id='.$challenge["id"].'">'.$challenge["name"].'</a></td>';
+                            echo '<td>'.$challenge["description"].'</td>';
+                            echo '<td  class="scoreboard-completed hidden-sm">#'.$challenge["hashtag"].'</td>';
+                            echo '<td class="scoreboard-points">'.$challenge["score"].'</td>';
+                            echo '</tr>';
+                            $index++; 
+>>>>>>> Stashed changes
                         } 
-                    ?>
+                ?>
                     </tbody>
                 </table>
-            <?php } ?>
+            <?php 
+                } else {
+                    echo 'Todavia no has resuelto algún reto';
+                } 
+            }
+            ?>
 
 
         </div>

@@ -1,6 +1,7 @@
 <?php
 require_once("Validation_Utility.php");
-require_once('DB_Manager.php');
+require_once("DB_Manager.php");
+require_once("Error_Codes.php");
 
 $sessionActive = ValidationUtility::sessionExists();
 ?>
@@ -15,6 +16,7 @@ $sessionActive = ValidationUtility::sessionExists();
             integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
             crossorigin="anonymous">
         </script>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <!--<script src="./script/main.js"></script>-->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i&subset=latin-ext" rel="stylesheet">
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
@@ -43,7 +45,7 @@ $sessionActive = ValidationUtility::sessionExists();
                 <ul class="pure-menu-list">
                     <li class="pure-menu-item">
                         <?php
-                            echo '<a href="View_EditUser.php?id='.$_SESSION["id"].'" class="pure-menu-link"><i class="fa fa-user"></i>';
+                            echo '<a href="View_EditUser.php" class="pure-menu-link"><i class="fa fa-user"></i>';
                             echo $_SESSION["twitter_name"];
                             echo '</a>';
                         ?>

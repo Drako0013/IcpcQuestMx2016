@@ -35,7 +35,9 @@ if( $sessionActive ){
 				}
 			}
 		} else {
+			ValidationUtility::setErrorCode("U_missingInformation");
 			header("location: View_EditUser.php");
+			exit;
 		}
 	}
 } else {
