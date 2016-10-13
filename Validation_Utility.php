@@ -3,6 +3,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 define("HashAlgorithm", "md5");
+define("PasswordMinLength", 6);
+define("PasswordMaxLength", 20);
+define("TwitterNameMaxLength", 15);
+define("ContestantNameMaxLength", 40);
+define("SchoolMaxLength", 50);
 
 class ValidationUtility{
 	
@@ -18,11 +23,44 @@ class ValidationUtility{
 	}
 
 	public static function isValidCharacterTwitterName($char){
-		return ($char >= 'A' and $char <= 'Z') or
+		/*return ($char >= 'A' and $char <= 'Z') or
 			($char >= 'a' and $char <= 'z') or 
 			($char >= '0' and $char <= '9') or
 			$char == '_';
-		//return ctype_alnum($char) or $char == '_';
+		*/
+		return ctype_alnum($char) or $char == '_';
+	}
+
+	public static function isSpecialSpanishCharacter($char){
+		return ($char == 'á' or $char == 'Á' or 
+			$char == 'é' or $char == 'É' or
+			$char == 'í' or $char == 'Í' or
+			$char == 'ó' or $char == 'Ó' or
+			$char == 'ú' or $char == 'Ú' or
+			$char == 'ü' or $char == 'Ü' or
+			$char == 'ñ' or $char == 'Ñ');
+	}
+
+	public static function isAplhaOrSpace($char){
+		return (ctype_alpha($char) or $char == ' ' or ValidationUtility::isSpecialSpanishCharacter($char));
+	}
+
+	public static function isAlphaAndSpacesString($string){
+		$string_length = strlen($string);
+		for($i = 0; $i < $string_length; $i++){
+			if( !ValidationUtility::isAplhaOrSpace($string[$i]) ){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static function isValidName($name){
+		return ValidationUtility::isAlphaAndSpacesString($name);
+	}
+
+	public static function isValidSchool($school){
+		return ValidationUtility::isAlphaAndSpacesString($school);
 	}
 
 	public static function isValidTwitterName($twitter_name){
@@ -40,12 +78,74 @@ class ValidationUtility{
 		}
 	}
 
-	public static function isValidPassword($password){
-		return (strlen($password) >= 6 and strlen($password) <= 20);
+	public static function passwordsMatch($password1, $password2){
+		return $password1 == $password2;
+	}
+
+	public static function isValidPasswordLength($password){
+		return (ValidationUtility::stringLengthIsAtLeast($password, 6) and 
+			ValidationUtility::stringLengthIsAtMost($password, 20));
+	}
+
+	public static function isValidNameLength($name){
+		return ValidationUtility::stringLengthIsAtMost($name, constant("ContestantNameMaxLength"));
+	}
+
+	public static function isValidSchoolLength($school){
+		return ValidationUtility::stringLengthIsAtMost($school, constant("SchoolMaxLength"));
+	}
+
+	public static function isValidTwitterNameLength($twitter_name){
+		return ValidationUtility::stringLengthIsAtMost($twitter_name, constant("TwitterNameMaxLength"));
+	}
+
+	public static function stringIsEmpty($string){
+		return (strlen($string) == 0);
 	}
 
 	public static function arrayIsEmpty($array){
 		return (count($array) == 0);
 	}
+
+	public static function stringLengthIsAtMost($string, $max_length){
+		return (strlen($string) <= $max_length);
+	}
+
+	public static function stringLengthIsAtLeast($string, $min_length){
+		return (strlen($string) >= $min_length);
+	}
+
+	public static function sessionExists(){
+		session_start();
+		return isset($_SESSION["id"]);
+	}
+
+	public static function getErrorCode(){
+		if(isset($_SESSION["errorCode"])){
+			$errorCode = $_SESSION["errorCode"];
+			unset($_SESSION["errorCode"]);
+			return $errorCode;
+		}
+		return "";
+	}
+
+	public static function setErrorCode($errorCode){
+		$_SESSION["errorCode"] = $errorCode;
+	}
+
+	public static function getStatusCode(){
+		if(isset($_SESSION["errorCode"])){
+			$statusCode = $_SESSION["statusCode"];
+			unset($_SESSION["statusCode"]);
+			return $statusCode;
+		}
+		return "";
+	}
+
+	public static function setStatusCode($statusCode){
+		$_SESSION["statusCode"] = $statusCode;
+	}
+
+	
 }	
 ?>
