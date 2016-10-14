@@ -1,5 +1,8 @@
 <?php
+session_start();
 require_once("header.php");
+require_once("Validation_Utility.php");
+require_once("DB_Manager.php");
 
 $db = new DBManager();
 if($sessionActive){
@@ -21,8 +24,7 @@ $table_header = '<table class="scoreboard pure-table pure-table-horizontal pure-
                         </tr>
                     </thead>
                     <tbody>';
-$table_footer = '</tbody>
-                </table>';
+$table_footer = '</tbody></table>';
 ?>
         <header id="header" class="header-challenge">
             <h1><i class="fa fa-flag" aria-hidden="true"></i> Retos</h1>
@@ -70,7 +72,6 @@ $table_footer = '</tbody>
                         }
                         echo $table_footer;
                     }
-<<<<<<< Updated upstream
                 } else {
                     //Session not exists, show all challenges
                     echo '<h3>Retos</h3>';
@@ -89,53 +90,6 @@ $table_footer = '</tbody>
                     echo $table_footer;
                 }
             ?>
-=======
-                ?>
-                </tbody>
-            </table>
-
-            <?php 
-            if($sessionActive){ 
-                $contestant_id = (int)$_SESSION["id"];
-                $solvedChallenges = $db->getSolvedChallenges($contestant_id);
-                echo '<h3>Retos resueltos</h3>';
-                if(!ValidationUtility::arrayIsEmpty($solvedChallenges)){
-            ?>
-                <table class="scoreboard pure-table pure-table-horizontal pure-table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Reto</th>
-                            <th>Descripción</th>
-                            <th class="scoreboard-completed hidden-sm">Hashtag</th>
-                            <th class="scoreboard-points">Puntos</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                        $index = 1;
-                        foreach($solvedChallenges as $challenge){
-                            echo '<tr>';
-                            echo '<td class="scoreboard-place">#'.$index.'</td>';
-                            echo '<td><a href="View_ChallengeDetails.php?id='.$challenge["id"].'">'.$challenge["name"].'</a></td>';
-                            echo '<td>'.$challenge["description"].'</td>';
-                            echo '<td  class="scoreboard-completed hidden-sm">#'.$challenge["hashtag"].'</td>';
-                            echo '<td class="scoreboard-points">'.$challenge["score"].'</td>';
-                            echo '</tr>';
-                            $index++; 
-                        } 
-                ?>
-                    </tbody>
-                </table>
-            <?php 
-                } else {
-                    echo 'Todavia no has resuelto algún reto';
-                } 
-            }
-            ?>
-
-
->>>>>>> Stashed changes
         </div>
         <footer>
             Un pie de página

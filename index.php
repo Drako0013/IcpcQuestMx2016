@@ -19,7 +19,7 @@ $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));
             </p>
             <?php if (!$sessionActive): ?>
             <p>
-                Para poder participar, deberás <a href="#"><i class="fa fa-user-plus"></i> regístrate</a> primero.
+                Para poder participar, deberás <a href="View_Register.php"><i class="fa fa-user-plus"></i> regístrate</a> primero.
                 Si ya lo hiciste, puedes ver tus intentos
                 <a href="View_Login.php"><i class="fa fa-sign-in"></i> iniciando sesión</a>.
             </p>
