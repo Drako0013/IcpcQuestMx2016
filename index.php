@@ -1,5 +1,6 @@
 <?php
 require_once("header.php");
+require_once("Status_Codes.php");
 define("ChallengesNumber", 5);
 $db = new DBManager();
 $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));  
@@ -9,7 +10,12 @@ $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));
         </header>
         <div id="content">
             <p>
-                Texto introductorio.
+                <?php 
+                    $statusCode = ValidationUtility::getStatusCode();
+                    if ( !empty($statusCode) ){
+                        echo constant($statusCode);
+                    }
+                ?>
             </p>
             <?php if (!$sessionActive): ?>
             <p>

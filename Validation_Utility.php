@@ -145,7 +145,7 @@ class ValidationUtility{
 	}
 
 	public static function getStatusCode(){
-		if(isset($_SESSION["errorCode"])){
+		if(isset($_SESSION["statusCode"])){
 			$statusCode = $_SESSION["statusCode"];
 			unset($_SESSION["statusCode"]);
 			return $statusCode;

@@ -80,26 +80,27 @@ class DBManager{
 	public function editContestantInformation($id, $twitter_name, $name, $school, $password){
 		$query = "UPDATE Contestant SET twitter_name = ?, name  = ?, school  = ?, password = ? WHERE id = ?";
 		$statement = $this->conn->prepare($query);
-		$statement->bind_param("ssssi", 
-			$twitter_name, 
-			$name, 
-			$school, 
-			$password,
-			$id);
-		$statement->execute();
+		if( !( $statement->bind_param("ssssi", $twitter_name, $name, $school, $password, $id) ) ){
+			return false;
+		}
+		if( !( $statement->execute() ) ){
+			return false;
+		}
 		$statement->close();
+		return true;
 	}
 
 	public function editContestantInformationWoPassword($id, $twitter_name, $name, $school){
 		$query = "UPDATE Contestant SET twitter_name = ?, name  = ?, school  = ? WHERE id = ?";
 		$statement = $this->conn->prepare($query);
-		$statement->bind_param("sssi", 
-			$twitter_name, 
-			$name, 
-			$school,
-			$id);
-		$statement->execute();
+		if( !( $statement->bind_param("sssi", $twitter_name, $name, $school, $id) ) ){
+			return false;
+		}
+		if( !( $statement->execute() ) ){
+			return false;
+		}
 		$statement->close();
+		return true;
 	}
 
 	public function acceptChallengeCompletion($id){
