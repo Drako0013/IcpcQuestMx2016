@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
 /*
 States for challenge completion:
 0 - Unchecked
@@ -233,9 +231,15 @@ class DBManager{
 			FROM Contestant 
 			WHERE twitter_name = ? AND password = ?";
 		$statement = $this->conn->prepare($query);
-		$statement->bind_param("ss", $twitter_name, $password);
-		$statement->execute();
-		$statement->bind_result($id, $twitter_id, $twitter_name, $name, $school, $password);
+		if( ! ($statement->bind_param("ss", $twitter_name, $password) ) ){
+			return false;	
+		}
+		if( ! ($statement->execute()) ){
+			return false;
+		}
+		if( ! ($statement->bind_result($id, $twitter_id, $twitter_name, $name, $school, $password) ) ){
+			return false;
+		}
 
 		$contestant = array();
 		while ($statement->fetch()) {
