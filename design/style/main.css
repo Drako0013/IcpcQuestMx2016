@@ -1,0 +1,386 @@
+html, body, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-size: 16px;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+}
+
+a {
+    color: #08f;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #08f;
+}
+
+#home-menu {
+    color: #eee;
+    background-color: #333;
+}
+
+.pure-menu-heading {
+    color: #eee;
+    text-transform: none;
+}
+
+.pure-menu-heading:visited {
+    color: #eee;
+}
+
+.pure-menu-item .pure-menu-link {
+    color: #ddd;
+}
+
+.pure-menu-item .pure-menu-link:visited {
+    color: #ddd;
+}
+
+.pure-menu-selected {
+    background-color: #666;
+}
+
+.pure-menu-selected .pure-menu-link, .pure-menu-selected .pure-menu-link:visited {
+    color: #eee;
+}
+
+.pure-menu-link:hover {
+    color: #333 !important;
+}
+
+nav {
+    display: inline-block;
+}
+
+#header {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    margin: 0 0 0 0;
+    padding: 2em 0.5em 0.5em 0.5em;
+    color: #f8f8f8;
+    background-color: #666;
+}
+
+.header-home {
+    padding-left: 4.5em !important;
+    background-image: url(../images/icpclogo.png);
+    background-size: auto 2em;
+    background-color: #eee !important;
+    color: #000 !important;
+    background-repeat: no-repeat;
+    background-position: left 0.5em bottom 0.25em;
+}
+
+.header-scoreboard {
+    background-color: #0a0 !important;
+}
+
+.header-challenge {
+    background-color: #d00 !important;
+}
+
+.header-register {
+    background-color: #08f !important;
+}
+
+#header h1 {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+}
+
+#content { 
+    flex: 1;
+    padding: 1em;
+    clear: both;
+    background: #fcfcfc;
+}
+
+#content h2 {
+    font-weight: 600;
+}
+
+#content h3 {
+    font-weight: 600;
+}
+
+#flex-container {
+    display: flex;
+}
+
+#flex-container .flex-element {
+    margin-right: 1em;
+    margin-bottom: 2em;
+    flex: 1;
+}
+
+.timeline-container {
+    width: 520px;
+    max-width: 100%;
+}
+
+.challenge-list-element {
+    padding: 1em .5em;
+}
+
+.challenge-list-element:nth-child(odd) {
+    background-color: #eee;
+}
+
+.challenge-list-element:hover {
+    background-color: #ddd;
+}
+
+.challenge-list-element-header {
+    height: 2em;
+}
+
+.challenge-list-element-name {
+    float: left;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.challenge-list-element-hashtag {
+    float: right;
+    color: #08f;
+}
+
+.challenge-list-element-description {
+    clear: both;
+}
+
+.challenge-list-element-more {
+    margin-top: 0.5em;
+    font-size: 0.8em;
+}
+
+.challenge-list-more {
+    margin-top: 1em; 
+}
+
+.scoreboard {
+    width: 100%;
+}
+
+.scoreboard thead {
+    color: #eee;
+    background-color: #666;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.scoreboard tbody tr:hover td {
+    background-color: #ddd;
+}
+
+.scoreboard-place {
+    width: 3em;
+}
+
+.scoreboard-completed {
+    width: 10em;
+    text-align: right;
+}
+
+.scoreboard-points {
+    width: 4em;
+    text-align: right;
+}
+
+.challenge-title {
+    float: left;
+    margin-top: 0;
+}
+
+.challenge-hashtag {
+    float: right;
+    font-style: italic;
+    color: #08f;
+    vertical-align: bottom;
+    margin-left: 2em;
+}
+
+.challenge-points {
+    line-height: 2em;
+    padding: 0 0.5em;
+    float: right;
+    text-shadow: 0 0 2px #fff;
+    border-radius: 4px;
+    background-color: #ea0;
+    color: #fff;
+}
+
+.challenge-points-accepted {
+    background-color: #0a0;
+}
+
+.challenge-description {
+    margin-top: 1em;
+    clear: both;
+}
+
+.challenge-hashtag-line {
+    line-height: 2em;
+    margin-right: 2em;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.challenge-try-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.challenge-try {
+    width: 500px;
+    margin: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.challenge-try:hover {
+    background-color: #eef8ff !important;
+}
+
+.challenge-try-picture {
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.challenge-try-status {
+    float: right;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+}
+
+.challenge-try-status-accepted {
+    font-weight: 600;
+}
+
+.challenge-try-status-accepted .fa {
+    color: #0a0;
+}
+
+.challenge-try-status-pending {
+    font-style: italic;
+}
+
+.challenge-try-status-pending .fa {
+    color: #fb0;
+}
+
+.challenge-try-status-denied {
+    font-weight: 600;
+}
+
+.challenge-try-status-denied .fa {
+    color: #d00;
+}
+
+.challenge-try-handle {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+}
+
+.challenge-try-twitter {
+    margin-left: 0.5em;
+    font-size: 0.8em;
+}
+
+.challenge-try-content {
+    margin: .5em;
+}
+
+.challenge-try-time {
+    font-size: 0.8em;
+    margin: 0.5em;
+    color: #888;
+}
+
+.challenge-try-zelda, .challenge-try-zelda:visited {
+    color: #ccc;
+}
+
+.challenge-try-zelda:hover {
+    color: #08f;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 1em;
+    padding: 1em;
+    color: #eee;
+    background-color: #666;
+}
+
+#home-menu {
+    text-align: left;
+}
+
+#home-menu-nav {
+    float: right;
+}
+
+@media (min-width: 36em) {
+}
+
+@media (max-width: 36em) {
+    .pure-menu-heading {
+        display: block !important;
+    }
+
+    #header {
+        padding-top: 3.5em;
+    }
+}
+
+@media (min-width: 48em) {
+    .hidden-lg {
+        display: none;
+    }
+}
+
+@media (max-width: 48em) {
+    .hidden-sm {
+        display: none;
+    }
+}
+
+@media (min-width: 60em) {
+    #flex-container {
+        flex-flow: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 60em) {
+    #flex-container {
+        flex-flow: column;
+    }
+}
