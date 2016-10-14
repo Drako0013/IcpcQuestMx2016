@@ -43,7 +43,7 @@ $errorCode = ValidationUtility::getErrorCode();
                         ?>
                     </div>
                     <div class="pure-controls">
-                        <button type="submit" class="pure-button pure-button-primary">Registrarse</button>
+                        <button type="submit" class="pure-button pure-button-primary">Iniciar sesión</button>
                     </div>
                 </fieldset>
             </form>
