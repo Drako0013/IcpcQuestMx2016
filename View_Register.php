@@ -14,7 +14,7 @@ $errorCode = ValidationUtility::getErrorCode();
         </header>
         <div id="content">
             <?php
-                if($errorCode == "U_missingInformation"){
+                if($errorCode == "U_missingInformation" or $errorCode == "DB_Failure"){
                     echo constant($errorCode);
                 }
             ?>

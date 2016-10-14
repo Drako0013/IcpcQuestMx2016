@@ -117,6 +117,18 @@ class ValidationManager{
 		return true;
 	}
 
+	public static function validateFormLogin(&$twitter_name, &$password){
+		if( !ValidationManager::validateTwitterName($twitter_name) ){
+			return false;
+		}
+
+		if( !ValidationManager::validateMatchingPasswords($password, $password, $required = true) ){
+			return false;
+		}
+
+		return true;
+	}
+
 }
 
 ?>

@@ -1,9 +1,6 @@
 <?php
 mb_internal_encoding('utf-8'); // FUNCIONA SIN ESTO, PERO RECOMENDARÍA USARLO.
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
 define("HashAlgorithm", "md5");
 define("PasswordMinLength", 6);
 define("PasswordMaxLength", 20);
@@ -25,12 +22,13 @@ class ValidationUtility{
 	}
 
 	public static function isValidCharacterTwitterName($char){
-		/*return ($char >= 'A' and $char <= 'Z') or
+		return ($char >= 'A' and $char <= 'Z') or
 			($char >= 'a' and $char <= 'z') or 
 			($char >= '0' and $char <= '9') or
 			$char == '_';
-		*/
+		/*
 		return ctype_alnum($char) or $char == '_';
+		*/
 	}
 
 	public static function isSpecialSpanishCharacter($char){
@@ -132,6 +130,7 @@ class ValidationUtility{
 	}
 
 	public static function getErrorCode(){
+		session_start();
 		if(isset($_SESSION["errorCode"])){
 			$errorCode = $_SESSION["errorCode"];
 			unset($_SESSION["errorCode"]);
@@ -141,10 +140,12 @@ class ValidationUtility{
 	}
 
 	public static function setErrorCode($errorCode){
+		session_start();
 		$_SESSION["errorCode"] = $errorCode;
 	}
 
 	public static function getStatusCode(){
+		session_start();
 		if(isset($_SESSION["statusCode"])){
 			$statusCode = $_SESSION["statusCode"];
 			unset($_SESSION["statusCode"]);
@@ -154,6 +155,7 @@ class ValidationUtility{
 	}
 
 	public static function setStatusCode($statusCode){
+		session_start();
 		$_SESSION["statusCode"] = $statusCode;
 	}
 

@@ -9,6 +9,7 @@ if($sessionActive){
 } else {
     $allChallenges = $db->getChallengesList();
 }
+unset($db);
 $table_header = '<table class="scoreboard pure-table pure-table-horizontal pure-table-striped">
                     <thead>
                         <tr>
