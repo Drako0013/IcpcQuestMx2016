@@ -19,8 +19,8 @@ $sessionActive = ValidationUtility::sessionExists();
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <!--<script src="./script/main.js"></script>-->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i&subset=latin-ext" rel="stylesheet">
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="./style/pure/pure-min.css">
+        <link rel="stylesheet" href="./style/pure/grids-responsive-min.css">
         <link rel="stylesheet" href="./style/main.css">
         <link rel="stylesheet" href="./style/font-awesome/css/font-awesome.min.css">
     </head>
