@@ -3,11 +3,21 @@
 require_once("Validation_Utility.php");
 require_once("Error_Codes.php");
 require_once("Status_Codes.php");
+require_once("TAE.php");
 
 class ValidationManager{
 
+	public static function twitterNameToID($twitter_name){
+		$twitterID = ValidationUtility::twitterNameExists($twitter_name);
+		if( $twitterID == false ){
+			ValidationUtility::setErrorCode("U_twitterNameNotExists");
+		}
+		return $twitterID;
+	}
+
 	public static function validateTwitterName(&$twitter_name){
 		$twitter_name = ValidationUtility::sanitizeString($twitter_name);
+
 		if( !ValidationUtility::isValidTwitterName($twitter_name) ){
 			ValidationUtility::setErrorCode("U_twitterName");
 			return false;

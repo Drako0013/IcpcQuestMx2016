@@ -36,7 +36,13 @@ if( isset($_POST[constant("twitter_name_field")]) and
 	if( ValidationManager::validateFormRegisterUser($twitter_name, $name, $school, $password, $password_check) ){
 		$db = new DBManager();
 
-		if( $db->addNewContestant($twitter_name, $name, $school, $password) ){
+		$twitterID = ValidationManager::twitterNameToID($twitter_name);
+		if( $twitterID == false ){
+			header("location: View_Register.php");
+			exit;
+		}
+
+		if( $db->addNewContestant($twitterID, $twitter_name, $name, $school, $password) ){
 			ValidationUtility::setStatusCode("U_RegisterOK");
 			header("location: index.php");	
 			exit;

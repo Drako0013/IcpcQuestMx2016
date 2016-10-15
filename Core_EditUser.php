@@ -34,15 +34,20 @@ if( $sessionActive ){
 			exit;
 		}
 
+		$twitter_id = ValidationManager::twitterNameToID($twitter_name);
+		if( $twitter_id == false ){
+			header("location: View_EditUser.php");
+			exit;
+		}
 
 		if($passwordChange){
-			if( !$db->editContestantInformation($id, $twitter_name, $name, $school, $new_password) ){
+			if( !$db->editContestantInformation($id, $twitter_id, $twitter_name, $name, $school, $new_password) ){
 				ValidationUtility::setErrorCode("DB_Failure");
 				header("location: View_EditUser.php");
 				exit;
 			}
 		} else {
-			if( !$db->editContestantInformationWoPassword($id, $twitter_name, $name, $school)){
+			if( !$db->editContestantInformationWoPassword($id, $twitter_id, $twitter_name, $name, $school)){
 				ValidationUtility::setErrorCode("DB_Failure");
 				header("location: View_EditUser.php");
 				exit;

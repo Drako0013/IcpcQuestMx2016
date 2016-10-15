@@ -31,7 +31,9 @@ if($sessionActive){
                         <label for="twitter_name">Nombre de usuario en Twitter: @</label>
                         <input type="text" name="twitter_name" value="<?php echo $twitter_name;?>" maxlength="15" required/>
                         <?php 
-                            if( $errorCode == "U_twitterName" or $errorCode == "U_twitterNameLength" ){
+                            if( $errorCode == "U_twitterName" or 
+                                $errorCode == "U_twitterNameLength" or 
+                                $errorCode == "U_twitterNameNotExists"){
                                 echo constant($errorCode);
                             }
                         ?>

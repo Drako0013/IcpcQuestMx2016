@@ -36,10 +36,10 @@ class DBManager{
 		$this->conn->close();
 	}
 
-	public function addNewContestant($twitter_name, $name, $school, $password){
-		$query = "INSERT INTO Contestant(twitter_name, name, school, password) VALUES(?,?,?,?)";
+	public function addNewContestant($twitter_id, $twitter_name, $name, $school, $password){
+		$query = "INSERT INTO Contestant(twitter_id, twitter_name, name, school, password) VALUES(?,?,?,?,?)";
 		$statement = $this->conn->prepare($query);
-		if( !( $statement->bind_param("ssss", $twitter_name, $name, $school,	$password) ) ){
+		if( !( $statement->bind_param("sssss", $twitter_id, $twitter_name, $name, $school, $password) ) ){
 			return false;
 		}
 		if( !( $statement->execute() ) ){
@@ -75,10 +75,10 @@ class DBManager{
 		$statement->close();
 	}
 
-	public function editContestantInformation($id, $twitter_name, $name, $school, $password){
-		$query = "UPDATE Contestant SET twitter_name = ?, name  = ?, school  = ?, password = ? WHERE id = ?";
+	public function editContestantInformation($id, $twitter_id, $twitter_name, $name, $school, $password){
+		$query = "UPDATE Contestant SET twitter_id = ?, twitter_name = ?, name  = ?, school  = ?, password = ? WHERE id = ?";
 		$statement = $this->conn->prepare($query);
-		if( !( $statement->bind_param("ssssi", $twitter_name, $name, $school, $password, $id) ) ){
+		if( !( $statement->bind_param("sssssi", $twitter_id, $twitter_name, $name, $school, $password, $id) ) ){
 			return false;
 		}
 		if( !( $statement->execute() ) ){
@@ -88,10 +88,10 @@ class DBManager{
 		return true;
 	}
 
-	public function editContestantInformationWoPassword($id, $twitter_name, $name, $school){
-		$query = "UPDATE Contestant SET twitter_name = ?, name  = ?, school  = ? WHERE id = ?";
+	public function editContestantInformationWoPassword($id, $twitter_id, $twitter_name, $name, $school){
+		$query = "UPDATE Contestant SET twitter_id = ?, twitter_name = ?, name  = ?, school  = ? WHERE id = ?";
 		$statement = $this->conn->prepare($query);
-		if( !( $statement->bind_param("sssi", $twitter_name, $name, $school, $id) ) ){
+		if( !( $statement->bind_param("ssssi", $twitter_id, $twitter_name, $name, $school, $id) ) ){
 			return false;
 		}
 		if( !( $statement->execute() ) ){
@@ -138,6 +138,24 @@ class DBManager{
 		$statement->bind_param("i", $id);
 		$statement->execute();
 		$statement->close();
+	}
+
+	public function getContestantsList(){
+		$query = "SELECT id, twitter_id, twitter_name, name, school FROM Contestant";
+		$index = 0;
+		$contestants = array();
+		if ($result = $this->conn->query($query)) {
+			while ($row = $result->fetch_row()) {
+				$contestants[$index] = array("id" => $row[0],
+					"twitter_id" => $row[1],
+					"twitter_name" => $row[2],
+					"name" => $row[3],
+					"school" => $row[4]);
+				$index++;
+			}
+			$result->close();
+		}
+		return $contestants;
 	}
 
 	public function getChallengesList(){

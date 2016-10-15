@@ -8,6 +8,8 @@ define("TwitterNameMaxLength", 15);
 define("ContestantNameMaxLength", 40);
 define("SchoolMaxLength", 50);
 
+require_once("TAE.php");
+
 class ValidationUtility{
 	
 	public static function hashString($string){
@@ -159,6 +161,28 @@ class ValidationUtility{
 		$_SESSION["statusCode"] = $statusCode;
 	}
 
-	
+	public static function twitterNameExists($twitter_name){
+		$settings = array(
+					'oauth_access_token' => "159271907-kNHqlJjxZ1s42pGiSpjLl3afV287v3QmB16Fvg1w",
+					'oauth_access_token_secret' => "y9C4xMPeVICPkVbWuaWoaWo0PE5hRY4W8AdyW0Gx0NOfc",
+					'consumer_key' => "PCLDeWkX6G3n4d6WiVqLCR0sq",
+					'consumer_secret' => "O5n9al7V3Rt59kKgtIxJCC3Yimhx1ljtD3tA4dLlHxPCm3k55b"
+					);
+		$url = "https://api.twitter.com/1.1/users/lookup.json";
+		$requestMethod = "GET";	
+		$twitter = new TwitterAPIExchange($settings);
+		$getfield = "?screen_name=" . $twitter_name;
+		$string = json_decode($twitter->setGetfield($getfield)
+			->buildOauth($url, $requestMethod)
+			->performRequest(),$assoc = TRUE);
+		//print_r($string);
+		$user = $string[0];
+		if( isset($user["id_str"]) ){
+			return $user["id_str"];
+		}
+		return false;
+	}
+
+
 }	
 ?>

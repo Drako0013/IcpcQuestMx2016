@@ -33,6 +33,7 @@ if( isset($_GET["id"]) ){
 	$twitter = new TwitterAPIExchange($settings);
 } else {
 	header("location: index.php");
+	exit;
 }
 ?>
         <header id="header" class="header-challenge">

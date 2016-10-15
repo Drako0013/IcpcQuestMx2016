@@ -1,5 +1,6 @@
 <?php
 
+define("U_twitterNameNotExists", "El nombre de usuario en twitter no existe");
 define("U_twitterName", "El nombre de usuario en twitter no es válido");
 define("U_twitterNameLength", "El nombre de usuario en twitter es muy largo");
 define("U_name", "El nombre no es válido");
