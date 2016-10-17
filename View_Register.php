@@ -14,7 +14,7 @@ $errorCode = ValidationUtility::getErrorCode();
         </header>
         <div id="content">
             <?php
-                if($errorCode == "U_missingInformation" or $errorCode == "DB_Failure"){
+                if($errorCode == "U_missingInformation" or $errorCode == "DB_Failure" or $errorCode == "Recaptcha_Failure"){
                     echo constant($errorCode);
                 }
             ?>
@@ -63,6 +63,10 @@ $errorCode = ValidationUtility::getErrorCode();
                     <div class="pure-control-group">
                         <label for="password_check">Reingresa tu contraseña:</label>
                         <input type="password" name="password_check" maxlength="20" required pattern=".{6,}" title="Mínimo 6 caracteres" /> <br/>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <div class="g-recaptcha" data-sitekey="6LfIhAkUAAAAAMCCOb6NOQaWw99T960Xegqyn70E"></div>
                     </div>
 
                     <div class="pure-controls">

@@ -70,8 +70,6 @@ $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));
                 </div>
             </div>
         </div>
-        <footer>
-            Un pie de página
-        </footer>
+        <?php include_once("footer.php");?>
     </body>
 </html>

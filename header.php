@@ -23,6 +23,7 @@ $sessionActive = ValidationUtility::sessionExists();
         <link rel="stylesheet" href="./style/pure/grids-responsive-min.css">
         <link rel="stylesheet" href="./style/main.css">
         <link rel="stylesheet" href="./style/font-awesome/css/font-awesome.min.css">
+       <script src='https://www.google.com/recaptcha/api.js?hl=es'></script>
     </head>
     <body>
         <div id="home-menu" class="pure-menu pure-menu-horizontal pure-menu-fixed">
