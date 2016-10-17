@@ -2,6 +2,7 @@
 require_once("header.php");
 require_once("Error_Codes.php");
 require_once("Status_Codes.php");
+require_once('API_Constants.php');
 
 if($sessionActive){
     header("location: index.php");
@@ -66,7 +67,7 @@ $errorCode = ValidationUtility::getErrorCode();
                     </div>
 
                     <div class="pure-control-group">
-                        <div class="g-recaptcha" data-sitekey="6LfIhAkUAAAAAMCCOb6NOQaWw99T960Xegqyn70E"></div>
+                        <div class="g-recaptcha" data-sitekey="<?php echo constant('recaptcha_site_key');?>"></div>
                     </div>
 
                     <div class="pure-controls">

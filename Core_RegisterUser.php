@@ -6,6 +6,7 @@ require_once("Error_Codes.php");
 require_once("Status_Codes.php");
 require_once("Validation_Manager.php");
 require_once("recaptchalib.php");
+require_once('API_Constants.php');
 
 $sessionActive = ValidationUtility::sessionExists();
 
@@ -15,10 +16,9 @@ define("school_field", "school");
 define("password_field", "password");
 define("password_check_field", "password_check");
 define('captcha_field', 'g-recaptcha-response');
-define('captcha_secret', '6LfIhAkUAAAAAEhdFFhUKe8kNPrkSwjY3KmWQN7u');
 
 $captcha_response = null;
-$reCaptcha = new ReCaptcha(constant('captcha_secret'));
+$reCaptcha = new ReCaptcha(constant('recaptcha_secret'));
 
 /*
 echo $_POST[constant("twitter_name_field")];

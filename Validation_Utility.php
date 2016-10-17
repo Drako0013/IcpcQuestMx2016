@@ -1,14 +1,15 @@
 <?php
 mb_internal_encoding('utf-8'); // FUNCIONA SIN ESTO, PERO RECOMENDARÍA USARLO.
 
+require_once("TAE.php");
+require_once("API_Constants.php");
+
 define("HashAlgorithm", "md5");
 define("PasswordMinLength", 6);
 define("PasswordMaxLength", 20);
 define("TwitterNameMaxLength", 15);
 define("ContestantNameMaxLength", 40);
 define("SchoolMaxLength", 50);
-
-require_once("TAE.php");
 
 class ValidationUtility{
 	
@@ -163,22 +164,22 @@ class ValidationUtility{
 
 	public static function twitterNameExists($twitter_name){
 		$settings = array(
-					'oauth_access_token' => "159271907-kNHqlJjxZ1s42pGiSpjLl3afV287v3QmB16Fvg1w",
-					'oauth_access_token_secret' => "y9C4xMPeVICPkVbWuaWoaWo0PE5hRY4W8AdyW0Gx0NOfc",
-					'consumer_key' => "PCLDeWkX6G3n4d6WiVqLCR0sq",
-					'consumer_secret' => "O5n9al7V3Rt59kKgtIxJCC3Yimhx1ljtD3tA4dLlHxPCm3k55b"
+					'oauth_access_token' => constant('twitter_oauth_access_token'),
+					'oauth_access_token_secret' => constant('twitter_oauth_access_token_secret'),
+					'consumer_key' => constant('twitter_consumer_key'),
+					'consumer_secret' => constant('twitter_consumer_secret')
 					);
-		$url = "https://api.twitter.com/1.1/users/lookup.json";
-		$requestMethod = "GET";	
+		$url = 'https://api.twitter.com/1.1/users/lookup.json';
+		$requestMethod = 'GET';	
 		$twitter = new TwitterAPIExchange($settings);
-		$getfield = "?screen_name=" . $twitter_name;
+		$getfield = '?screen_name=' . $twitter_name;
 		$string = json_decode($twitter->setGetfield($getfield)
 			->buildOauth($url, $requestMethod)
 			->performRequest(),$assoc = TRUE);
 		//print_r($string);
 		$user = $string[0];
-		if( isset($user["id_str"]) ){
-			return $user["id_str"];
+		if( isset($user['id_str']) ){
+			return $user['id_str'];
 		}
 		return false;
 	}

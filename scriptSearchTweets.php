@@ -4,6 +4,7 @@ ini_set('display_errors', '1');
 
 require_once("TAE.php");
 require_once("DB_Manager.php");
+require_once('API_Constants.php');
 require_once("scriptSearchTweets_Helper.php");
 
 define("waitTimeInSeconds", 30);
@@ -12,12 +13,12 @@ define("hashtagToSearch", "SiMiCelularHablara");
 define("maxTweetsPerSearch", 100);
 
 $settings = array(
-'oauth_access_token' => "159271907-kNHqlJjxZ1s42pGiSpjLl3afV287v3QmB16Fvg1w",
-'oauth_access_token_secret' => "y9C4xMPeVICPkVbWuaWoaWo0PE5hRY4W8AdyW0Gx0NOfc",
-'consumer_key' => "PCLDeWkX6G3n4d6WiVqLCR0sq",
-'consumer_secret' => "O5n9al7V3Rt59kKgtIxJCC3Yimhx1ljtD3tA4dLlHxPCm3k55b"
+'oauth_access_token' => constant('twitter_oauth_access_token'),
+'oauth_access_token_secret' => constant('twitter_oauth_access_token_secret'),
+'consumer_key' => constant('twitter_consumer_key'),
+'consumer_secret' => constant('twitter_consumer_secret')
 );
-$url = "https://api.twitter.com/1.1/search/tweets.json";
+$url = 'https://api.twitter.com/1.1/search/tweets.json';
 $requestMethod = "GET";
 
 $hashtag = "%23" . constant("hashtagToSearch");
