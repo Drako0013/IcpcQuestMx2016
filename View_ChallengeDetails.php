@@ -169,8 +169,6 @@ if( isset($_GET["id"]) ){
 	            }
             ?>
         </div>
-        <footer>
-            Un pie de página
-        </footer>
-    </body>
-</html>
+<?php
+include "footer.php";
+?>

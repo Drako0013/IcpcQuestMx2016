@@ -41,8 +41,6 @@ require_once("header.php");
                 </tbody>
             </table>
         </div>
-        <footer>
-            Un pie de página
-        </footer>
-    </body>
-</html>
+<?php
+include "footer.php";
+?>

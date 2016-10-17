@@ -48,8 +48,6 @@ $errorCode = ValidationUtility::getErrorCode();
                 </fieldset>
             </form>
         </div>
-        <footer>
-            Un pie de página
-        </footer>
-    </body>
-</html>
+<?php
+include "footer.php";
+?>

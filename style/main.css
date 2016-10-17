@@ -77,12 +77,12 @@ nav {
 
 .header-home {
     padding-left: 4.5em !important;
-    background-image: url(../images/icpclogo.png);
-    background-size: auto 2em;
+    background-image: url(../images/huron.png);
+    background-size: auto 2.25em;
     background-color: #eee !important;
     color: #000 !important;
     background-repeat: no-repeat;
-    background-position: left 0.5em bottom 0.25em;
+    background-position: left 0.25em bottom 0;
 }
 
 .header-scoreboard {
@@ -110,7 +110,11 @@ nav {
                 flex: 1;
     padding: 1em;
     clear: both;
-    background: #fcfcfc;
+    background-color: #fcfcfc;
+    background-image: url(../images/background.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
 }
 
 #content h2 {
@@ -349,7 +353,6 @@ nav {
 footer {
     text-align: center;
     font-size: 0.8em;
-    margin-top: 1em;
     padding: 1em;
     color: #eee;
     background-color: #666;
