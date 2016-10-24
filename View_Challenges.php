@@ -31,7 +31,7 @@ $table_footer = '</tbody></table>';
         </header>
         <div id="content">
             <p>
-                Completa retos, twittealos, y gana posiblememnte inexistentes premios :D.
+                Completa retos, twittealos y gana premios. Más simple y sencillo no podría ser.
             </p>
 
             <?php

@@ -24,6 +24,15 @@ $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));
                 <a href="View_Login.php"><i class="fa fa-sign-in"></i> iniciando sesión</a>.
             </p>
             <?php endif; ?>
+
+            <h2>¿Cómo participar?</h2>
+            <p>
+            	Para poder completar los retos debes subir un tweet con el hashtag #HuronQuest además de los hashtags de los
+            	retos que quieras completar, si cumples con los requisitos del reto entonces los administradores validarán
+            	tu tweet y obtendrás los puntos de los retos. Ganará el concursante que tenga la mayor cantidad de puntos 
+            	al final del concurso.
+            </p>
+
             <div id="flex-container">
                 <div class="flex-element">
                     <h2>Nuevos Retos</h2>

@@ -11,6 +11,7 @@ define("servername", 'localhost');
 define("username", 'root');
 define("password", 'n0m3l0s3');
 define("dbname", 'IcpcQuest');
+define("port", "3306");
 define("charset", "utf8");
 define("State_Unchecked", 0);
 define("State_NotAccepted", 1);
@@ -25,7 +26,9 @@ class DBManager{
 		$this->conn = new mysqli(constant("servername"), 
 			constant("username"), 
 			constant("password"), 
-			constant("dbname"));
+			constant("dbname"),
+			constant("port")
+			);
 		if( mysqli_connect_errno() ){
 			throw new Exception('Failed to connect to database: ' . mysqli_connect_errno() );
 		}

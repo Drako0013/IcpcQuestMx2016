@@ -6,7 +6,9 @@ require_once("header.php");
         </header>
         <div id="content">
             <p>
-                Inserte texto genérico para incentivar participantes aquí.
+                Premios y sorpresas le esperan a los ganadores del concurso, es muy fácil participar y mucho
+                más juntar puntos. Además si completas ciertos retos puedes llevarte a casa souvenirs del concurso
+                que no encontrarás en ningún otro lugar.
             </p>
             <table class="scoreboard pure-table pure-table-horizontal pure-table-striped">
                 <thead>

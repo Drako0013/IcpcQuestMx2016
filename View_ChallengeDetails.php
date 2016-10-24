@@ -40,9 +40,6 @@ if( isset($_GET["id"]) ){
             <h1><i class="fa fa-flag" aria-hidden="true"></i> Retos</h1>
         </header>
         <div id="content">
-            <p>
-                Retos retos retos
-            </p>
             <h2 class="challenge-title">
                 <?php echo $name;?>
             </h2>
