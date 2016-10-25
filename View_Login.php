@@ -14,7 +14,7 @@ $errorCode = ValidationUtility::getErrorCode();
 ?>
 
 <header id="header" class="header-register">
-            <h1><i class="fa fa-user-plus" aria-hidden="true"></i> Iniciar sesión</h1>
+            <h1><i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar sesión</h1>
         </header>
         <div id="content">
             <?php
