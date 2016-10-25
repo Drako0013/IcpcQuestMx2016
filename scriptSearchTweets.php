@@ -24,7 +24,6 @@ $hashtag = "%23" . constant("hashtagToSearch");
 $count = constant("maxTweetsPerSearch");
 $lastTweetId = constant("startingLastTweet");
 
-$getfield = "?q=".$hashtag."&count=".$count."&since_id=".$lastTweetId;
 $twitter = new TwitterAPIExchange($settings);
 
 //$db = new DBManager();
@@ -42,56 +41,54 @@ while( true ){
 
 	$contestantsList = $db->getContestantsList();
 	$contestantsTwitterIDList = ST_Helper::transformToTwitterUserArray($contestantsList);
+
+	//print_r($contestantsTwitterIDList);
+
 	unset($contestantsList);
 
-	/** Set access tokens here - see: https://dev.twitter.com/apps/ **/
+	$getfield = "?q=".$hashtag."&count=".$count."&since_id=".$lastTweetId;
 	$string = json_decode($twitter->setGetfield($getfield)->buildOauth($url, $requestMethod)->performRequest(), $assoc = TRUE);
 	/*
 	if($string["errors"][0]["message"] !In this chapter we will teach you how to create and write to a file on the server.= "") {echo "<h3>Sorry, there was a problem.</h3><p>Twitter returned the following error message:</p><p><em>".$string[errors][0]["message"]."</em></p>";exit();}
 	*/
 	$statuses = $string['statuses'];
 	$i = 0;
+
+	echo $string;
+
 	foreach ($statuses as $status) {
+		$knownUser = true;
+
 		$twitterUserInfo = $status["user"];
 		$twitterID = $twitterUserInfo["id_str"];
 		if( !isset($contestantsTwitterIDList[$twitterID]) ){
 			echo 'Usuario desconocido ' . $twitterID . "\n";
-			continue;
+			$knownUser = false;
 		}
-		$contestantId = $contestantsTwitterIDList[$twitterID];
-		
 		$tweetId = $status["id_str"];
 
-		$tweetEntities = $status["entities"];
-		$hastagsInTweet = $tweetEntities["hashtags"];
-		foreach($hashtagsInTweet as $hashtagInTweet){
-			if( !isset($hashtagList[$hashtagInTweet]) ){
-				echo 'No hay reto con el hashtag ' . $hashtagInTweet . "\n";
-				continue;
-			}
-			$challengeId = $hashtagList[$hashtagInTweet];
+		if( $knownUser ){
+			$contestantId = $contestantsTwitterIDList[$twitterID];
+			$tweetEntities = $status["entities"];
+			$hashtagsInTweet = $tweetEntities["hashtags"];
+			foreach($hashtagsInTweet as $hashtagInTweet){
+				//print_r($hashtagInTweet);
+				$hashtagText = $hashtagInTweet["text"];
 
-			echo 'Insertar intento para usuario ' . $contestantId . 
-				' para el reto ' . $challengeId . ' con el tweet ' . $tweetId . "\n";
-			$db->addNewChallengeCompletionTry($contestantId, $challengeId, $tweetId);
+				if( !isset($hashtagList[$hashtagText]) ){
+					echo 'No hay reto con el hashtag ' . $hashtagText . "\n";
+					continue;
+				}
+				$challengeId = $hashtagList[$hashtagText];
+
+				echo 'Insertar intento para usuario ' . $contestantId . 
+					' para el reto ' . $challengeId . ' con el tweet ' . $tweetId . "\n";
+				$db->addNewChallengeCompletionTry($contestantId, $challengeId, $tweetId);
+			}
 		}
 
 		$lastTweetId = max($lastTweetId, $tweetId);
-		//print_r($status);
-		/*
-		echo $i++;
-		echo "Created at: " . $status['created_at'] . "<br />";
-		echo "Id: ". $status['user']['id_str']."<br />";
-		echo "Screen name: ". $status['user']['screen_name']."<br />";
-		echo "Text: " .$status['text']."<br />";
-		foreach($status['entities']['hashtags'] as $hashtag_in_tweet){
-			echo "----- ".$hashtag_in_tweet['text']."<br />";
-		}
-		foreach ($status['entities']['media'] as $image) {
-			$image_url = $image['media_url'];
-			echo "<img src='$image_url' /><br/>";
-		}
-		*/
+		echo $lastTweetId . "\n";
 	}
 	unset($db);
 	$cycle++;

@@ -64,7 +64,21 @@ class DBManager{
 		$statement->close();		
 	}
 
+	public function challengeCompletionTryExists($challenge_id, $tweet_id){
+		$query = "SELECT challenge_id, tweet_id FROM ContestantChallengeCompletion WHERE challenge_id = ? AND tweet_id = ?";
+		$statement = $this->conn->prepare($query);
+		$statement->bind_param("is", $challenge_id, $tweet_id);
+		$statement->execute();
+		$statement->bind_result($tmp_a, $tmp_b);
+		$result = $statement->fetch();
+		$statement->close();
+		return $result;
+	}
+
 	public function addNewChallengeCompletionTry($contestant_id, $challenge_id, $tweet_id){
+		if ($this->challengeCompletionTryExists($challenge_id, $tweet_id))
+			return;
+
 		$state = constant("State_Unchecked");
 
 		$query = "INSERT INTO ContestantChallengeCompletion(contestant_id, challenge_id, tweet_id, state) VALUES(?,?,?,?)";
