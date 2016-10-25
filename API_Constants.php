@@ -7,3 +7,5 @@ define('twitter_consumer_secret', 'O5n9al7V3Rt59kKgtIxJCC3Yimhx1ljtD3tA4dLlHxPCm
 
 define('recaptcha_secret', '6LfIhAkUAAAAAEhdFFhUKe8kNPrkSwjY3KmWQN7u');
 define('recaptcha_site_key', '6LfIhAkUAAAAAMCCOb6NOQaWw99T960Xegqyn70E');
+
+define("hashtagToSearch", "HuronQuestTest");

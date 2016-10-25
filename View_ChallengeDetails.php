@@ -1,6 +1,7 @@
 <?php
 require_once("header.php");
 require_once("TAE.php");
+require_once("API_Constants.php");
 
 define("lastOwnTriesCount", 5);
 define("lastTriesCount", 10);
@@ -46,7 +47,7 @@ if( isset($_GET["id"]) ){
             <div class="challenge-hashtag">
                 <div class="challenge-hashtag-line">#<?php echo $hashtag;?></div>
                 <a
-                    href="https://twitter.com/intent/tweet?button_hashtag=<?php echo $hashtag;?>"
+                    href="https://twitter.com/intent/tweet?button_hashtag=<?php echo $hashtag;?>&amp;hashtags=<?php echo constant("hashtagToSearch");?>"
                     class="twitter-hashtag-button"
                     data-lang="es"
                     data-show-count="false">

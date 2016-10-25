@@ -9,7 +9,6 @@ require_once("scriptSearchTweets_Helper.php");
 
 define("waitTimeInSeconds", 120);
 define("startingLastTweet", "786974048148258817");
-define("hashtagToSearch", "HuronQuestTest");
 define("maxTweetsPerSearch", 100);
 
 $settings = array(
