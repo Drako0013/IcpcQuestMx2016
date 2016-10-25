@@ -64,7 +64,7 @@ if( isset($_GET["id"]) ){
             		echo '<div class="challenge-points">';
             	}
             	echo $score . ' puntos';
-            	echo '</div>;'
+            	echo '</div>';
             ?>
             <p class="challenge-description">
             	<?php echo $description;?>

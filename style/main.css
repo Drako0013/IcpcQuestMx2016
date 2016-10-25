@@ -148,6 +148,10 @@ nav {
     padding: 1em .5em;
 }
 
+.challenge-list-element:nth-child(even) {
+    background-color: #fff;
+}
+
 .challenge-list-element:nth-child(odd) {
     background-color: #eee;
 }
@@ -189,6 +193,7 @@ nav {
 
 .scoreboard {
     width: 100%;
+    background-color: #fff;
 }
 
 .scoreboard thead {
