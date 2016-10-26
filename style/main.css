@@ -277,14 +277,16 @@ nav {
 .challenge-try {
     width: 500px;
     margin: 0.5em;
-    padding-bottom: 0.5em;
+    padding: 0;
     background-color: #fff;
     border: 1px solid #ccc;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-.challenge-try:hover {
-    background-color: #eef8ff !important;
+.challenge-try-magic {
+    margin: 0.5em;
+    font-style: italic;
+    color: #888;
 }
 
 .challenge-try-picture {
@@ -296,9 +298,8 @@ nav {
 }
 
 .challenge-try-status {
-    float: right;
-    margin-top: 0.5em;
-    margin-right: 0.5em;
+    text-align: right;
+    margin: 0.5em;
 }
 
 .challenge-try-status-accepted {

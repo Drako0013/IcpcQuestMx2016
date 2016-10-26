@@ -81,7 +81,7 @@ if( isset($_GET["id"]) ){
 			            foreach ($lastOwnTries as $try) {
 			            	$tweet_id = $try["tweet_id"];
 			            	$state = $try["state"];
-			            	$getfield = "?id=$tweet_id&align=center";
+			            	$getfield = "?id=$tweet_id&align=center&lang=es";
 							$string = json_decode($twitter->setGetfield($getfield)
 							->buildOauth($url, $requestMethod)
 							->performRequest(),$assoc = TRUE);
@@ -107,7 +107,10 @@ if( isset($_GET["id"]) ){
 								}
 							}
 							$htmlCodeTweet = $string["html"];
-							echo $htmlCodeTweet;
+							if (strlen($htmlCodeTweet) == 0)
+								echo '<div class="challenge-try-magic">¿Eh? Como por arte de magia, este tuit ha desaparecido.</div>';
+							else
+								echo $htmlCodeTweet;
 							echo '</div>';
 		            	}
 			        	echo '</div>';
@@ -131,7 +134,7 @@ if( isset($_GET["id"]) ){
 			        foreach ($lastTries as $try) {
 			        	$tweet_id = $try["tweet_id"];
 			        	$state = $try["state"];
-			            $getfield = "?id=$tweet_id&align=center";
+			            $getfield = "?id=$tweet_id&align=center&lang=es";
 						$string = json_decode($twitter->setGetfield($getfield)
 						->buildOauth($url, $requestMethod)
 						->performRequest(),$assoc = TRUE);
@@ -157,7 +160,10 @@ if( isset($_GET["id"]) ){
 							}
 						}
 						$htmlCodeTweet = $string["html"];
-						echo $htmlCodeTweet;
+						if (strlen($htmlCodeTweet) == 0)
+							echo '<div class="challenge-try-magic">¿Eh? Como por arte de magia, este tuit ha desaparecido.</div>';
+						else
+							echo $htmlCodeTweet;
 						echo '</div>';
 		            }
 			        echo '</div>';
