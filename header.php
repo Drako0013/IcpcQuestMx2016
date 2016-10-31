@@ -28,7 +28,7 @@ $sessionActive = ValidationUtility::sessionExists();
     <body>
         <div id="home-menu" class="pure-menu pure-menu-horizontal pure-menu-fixed">
             <a class="pure-menu-heading" href="./">
-                ICPC Quest Mexico
+                Huron Quest
             </a>
             <nav id="home-menu-nav">
                 <ul class="pure-menu-list">

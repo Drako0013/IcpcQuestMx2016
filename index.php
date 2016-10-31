@@ -27,10 +27,10 @@ $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));
 
             <h2>¿Cómo participar?</h2>
             <p>
-            	Para poder completar los retos debes subir un tweet con el hashtag #HuronQuest además de los hashtags de los
-            	retos que quieras completar, si cumples con los requisitos del reto entonces los administradores validarán
-            	tu tweet y obtendrás los puntos de los retos. Ganará el concursante que tenga la mayor cantidad de puntos 
-            	al final del concurso.
+                Para poder completar los retos debes subir un tweet con el hashtag #HuronQuest además de los hashtags de los
+                retos que quieras completar. Si cumples con los requisitos del reto entonces los administradores validarán
+                tu tweet y obtendrás los puntos de los retos. Ganará el concursante que tenga la mayor cantidad de puntos 
+                al final del concurso.
             </p>
 
             <div id="flex-container">
@@ -60,18 +60,18 @@ $challengesList = $db->getLastNChallenges(constant("ChallengesNumber"));
                 </div>
                 <div class="timeline-container">
                     <h2>
-                        Reciente | <a href="https://twitter.com/hashtag/ICPC2016">#ICPC2016</a>
+                        Reciente | <a href="https://twitter.com/hashtag/HuronQuest">#HuronQuest</a>
                     </h2>
                     <a
                         class="twitter-timeline"
-                        href="https://twitter.com/hashtag/ICPC2016"
+                        href="https://twitter.com/hashtag/HuronQuest"
                         data-dnt="true"
-                        data-widget-id="785553558712098817"
+                        data-widget-id="792927567435079680"
                         data-tweet-limit="5"
                         data-lang="es"
                         data-chrome="noheader"
                         data-aria-polite="assertive">
-                        <i class="fa fa-twitter"></i> #ICPC2016
+                        <i class="fa fa-twitter"></i> #HuronQuest
                     </a>
                     <script>
                         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
